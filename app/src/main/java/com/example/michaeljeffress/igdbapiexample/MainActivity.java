@@ -72,28 +72,29 @@ public class MainActivity extends AppCompatActivity {
 
             IGDBService service = retrofit.create(IGDBService.class);
 
-            Call<Game> call = service.getGame(AppData.APP_KEY,
-                    "name", 10, 0, "release_dates.date:desc", gameName);
+            Call<List<Game>> call = service.getGame(AppData.APP_KEY,
+                    "name,developer,platform" , 10, 0, "release_dates.date:desc", gameName);
+
             Log.d(TAG, "getGameInfo: gameName = " + gameName + "   <–––> API key = " + AppData.APP_KEY);
 
-
-            call.enqueue(new Callback<Game>() {
+            call.enqueue(new Callback<List<Game>>() {
                 @Override
-                public void onResponse(Call<Game> call, Response<Game> response) {
+                public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
                     Log.d(TAG,"Call completed!");
                     try {
+                        Game game = response.body().get(0);
 
-                        String gameNameAfterApiCall = response.body().getName();
+                        String gameNameAfterApiCall = game.getName();
 
                         Log.d(TAG, "onResponse: gameNameAfterApiCall = " + gameNameAfterApiCall);
 
-                        List finalReleaseDates = response.body().getReleaseDates();
+                        List finalReleaseDates = game.getReleaseDates();
 
                         Log.d(TAG, "onResponse: finalReleaseDates = " + finalReleaseDates);
 
 
                         nameView.setText("Game Name: " + gameNameAfterApiCall);
-                        releaseDateView.setText("Release Date: " + finalReleaseDates.indexOf(0));
+                        releaseDateView.setText("Release Date: " + finalReleaseDates.get(0));
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -102,8 +103,8 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Call<Game> call, Throwable t) {
-
+                public void onFailure(Call<List<Game>> call, Throwable t) {
+                    Log.e(TAG, "onFailure: ", t);
                 }
             });
 

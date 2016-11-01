@@ -3,7 +3,6 @@ package com.example.michaeljeffress.igdbapiexample.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -17,7 +16,9 @@ public class Game {
     private String name;
     @SerializedName("release_dates")
     @Expose
-    private List<ReleaseDate> releaseDates = new ArrayList<ReleaseDate>();
+    private List<ReleaseDate> releaseDates;
+
+
 
     /**
      *
