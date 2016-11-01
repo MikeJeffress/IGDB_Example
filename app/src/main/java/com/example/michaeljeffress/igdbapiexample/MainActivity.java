@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,12 @@ public class MainActivity extends AppCompatActivity {
     private Button button;
     private TextView nameView;
     private TextView releaseDateView;
+    private TextView developerView;
+    private TextView publisherView;
+    private TextView platformView;
+    private TextView ratingView;
+    private TextView genreView;
+    private ImageView boxCoverView;
     private String gameName;
 
     private String TAG = "MainActivity";
@@ -44,11 +51,13 @@ public class MainActivity extends AppCompatActivity {
 
         nameView = (TextView) findViewById(R.id.name);
         releaseDateView = (TextView) findViewById(R.id.releaseDate);
+        developerView = (TextView) findViewById(R.id.developer);
+        publisherView = (TextView) findViewById(R.id.publisher);
+        platformView = (TextView) findViewById(R.id.platform);
+        ratingView = (TextView) findViewById(R.id.rating);
+        genreView = (TextView) findViewById(R.id.genre);
 
-//        HttpResponse<String> response = Unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=name&limit=10&offset=0&order=release_dates.date%3Adesc&search=zelda")
-//                .header("X-Mashape-Key", "6yTDKncVSomshYYc8QtijLfDRNx4p1qVYt4jsnlZ7ar8erjgpO")
-//                .header("Accept", "application/json")
-//                .asString();
+        boxCoverView = (ImageView) findViewById(R.id.boxCover);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
